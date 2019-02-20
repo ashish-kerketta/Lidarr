@@ -1,6 +1,5 @@
 using NLog;
 using NzbDrone.Core.Parser.Model;
-using Newtonsoft.Json;
 using System.IO;
 using System.Linq;
 using NzbDrone.Core.Configuration;
@@ -23,8 +22,8 @@ namespace NzbDrone.Core.MediaFiles
         void RemoveMusicBrainzTags(IEnumerable<AlbumRelease> albumRelease);
         void RemoveMusicBrainzTags(IEnumerable<Track> tracks);
         void RemoveMusicBrainzTags(TrackFile trackfile);
-        List<RetagTrackFilePreview> GetRenamePreviews(int artistId);
-        List<RetagTrackFilePreview> GetRenamePreviews(int artistId, int albumId);
+        List<RetagTrackFilePreview> GetRetagPreviewsByArtist(int artistId);
+        List<RetagTrackFilePreview> GetRetagPreviewsByAlbum(int artistId);
     }
     
     public class AudioTagService : IAudioTagService,
@@ -37,8 +36,6 @@ namespace NzbDrone.Core.MediaFiles
         private readonly IArtistService _artistService;
         private readonly Logger _logger;
         
-        private readonly JsonSerializerSettings _serializerSettings;
-
         public AudioTagService(IConfigService configService,
                                IMediaFileService mediaFileService,
                                IDiskProvider diskProvider,
@@ -96,7 +93,7 @@ namespace NzbDrone.Core.MediaFiles
 
         private void UpdateTrackfileSize(TrackFile trackfile, string path)
         {
-            // update the saved tracksize so that the importer doesn't get confused on the next scan
+            // update the saved file size so that the importer doesn't get confused on the next scan
             trackfile.Size = _diskProvider.GetFileSize(path);
             if (trackfile.Id > 0)
             {
@@ -244,9 +241,8 @@ namespace NzbDrone.Core.MediaFiles
             UpdateTrackfileSize(trackfile, path);
         }
 
-        public List<RetagTrackFilePreview> GetRenamePreviews(int artistId)
+        public List<RetagTrackFilePreview> GetRetagPreviewsByArtist(int artistId)
         {
-            var artist = _artistService.GetArtist(artistId);
             var files = _mediaFileService.GetFilesByArtist(artistId);
 
             return GetPreviews(files)
@@ -255,9 +251,8 @@ namespace NzbDrone.Core.MediaFiles
                 .ToList();
         }
 
-        public List<RetagTrackFilePreview> GetRenamePreviews(int artistId, int albumId)
+        public List<RetagTrackFilePreview> GetRetagPreviewsByAlbum(int albumId)
         {
-            var artist = _artistService.GetArtist(artistId);
             var files = _mediaFileService.GetFilesByAlbum(albumId);
 
             return GetPreviews(files)

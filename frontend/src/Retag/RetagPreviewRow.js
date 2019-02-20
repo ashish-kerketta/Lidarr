@@ -1,24 +1,22 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { icons, kinds } from 'Helpers/Props';
+import { icons } from 'Helpers/Props';
 import Icon from 'Components/Icon';
 import CheckInput from 'Components/Form/CheckInput';
 import styles from './RetagPreviewRow.css';
 import DescriptionList from 'Components/DescriptionList/DescriptionList';
 import DescriptionListItem from 'Components/DescriptionList/DescriptionListItem';
-import DescriptionListItemTitle from 'Components/DescriptionList/DescriptionListItemTitle';
-import DescriptionListItemDescription from 'Components/DescriptionList/DescriptionListItemDescription';
 
 function formatMissing(value) {
   if (value === undefined || value === 0 || value === '0') {
-    return (<Icon name={icons.BAN} size="12" />);
+    return (<Icon name={icons.BAN} size={12} />);
   }
   return value;
 }
 
 function formatChange(oldValue, newValue) {
   return (
-    <div> {formatMissing(oldValue)} <Icon name={icons.ARROW_RIGHT_NO_CIRCLE} size="12" /> {formatMissing(newValue)} </div>
+    <div> {formatMissing(oldValue)} <Icon name={icons.ARROW_RIGHT_NO_CIRCLE} size={12} /> {formatMissing(newValue)} </div>
   );
 }
 

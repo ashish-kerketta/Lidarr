@@ -16,13 +16,13 @@ namespace NzbDrone.Core.Test.MediaFiles.AudioTagServiceFixture
     public class AudioTagServiceFixture : CoreTest<AudioTagService>
     {
         // various tests will be run for all files listed here
-        private static string[] MediaFiles = new [] { "nin.mp3", "nin.flac", "nin.m4a", "nin.wma", "nin.ape" };
+        private static readonly  string[] MediaFiles = new [] { "nin.mp3", "nin.flac", "nin.m4a", "nin.wma", "nin.ape" };
 
         // properties to skip standard check of equality/difference
-        private static string[] AudioTagPropertiesToSkip = new [] { "Duration", "Quality", "MediaInfo" };
+        private static readonly string[] AudioTagPropertiesToSkip = new [] { "Duration", "Quality", "MediaInfo" };
         
-        private string testdir = Path.Combine(TestContext.CurrentContext.TestDirectory, "Files", "Media");
-        private string copiedFile = null;
+        private readonly string testdir = Path.Combine(TestContext.CurrentContext.TestDirectory, "Files", "Media");
+        private string copiedFile;
         private AudioTag testTags;
         
         [SetUp]

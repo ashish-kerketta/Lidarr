@@ -89,11 +89,11 @@ namespace NzbDrone.Core.Music
                 hash = hash * 23 + Title?.GetHashCode() ?? 0;
                 hash = hash * 23 + Status?.GetHashCode() ?? 0;
                 hash = hash * 23 + Duration;
-                // hash = hash * 23 + Label?.GetHashCode() ?? 0;n
+                hash = hash * 23 + Label?.GetHashCode() ?? 0;
                 hash = hash * 23 + Disambiguation?.GetHashCode() ?? 0;
-                // hash = hash * 23 + Country?.GetHashCode() ?? 0;
-                // hash = hash * 23 + ReleaseDate.GetHashCode();
-                // hash = hash * 23 + Media?.GetHashCode() ?? 0;
+                hash = hash * 23 + Country?.GetHashCode() ?? 0;
+                hash = hash * 23 + ReleaseDate.GetHashCode();
+                hash = hash * 23 + Media?.GetHashCode() ?? 0;
                 hash = hash * 23 + TrackCount;
                 hash = hash * 23 + Monitored.GetHashCode();
                 return hash;

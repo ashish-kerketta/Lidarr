@@ -20,25 +20,21 @@ namespace Lidarr.Api.V1.Tracks
 
         private List<RetagTrackResource> GetTracks()
         {
-            int artistId;
-
-            if (Request.Query.ArtistId.HasValue)
-            {
-                artistId = (int)Request.Query.ArtistId;
-            }
-
-            else
-            {
-                throw new BadRequestException("artistId is missing");
-            }
-
             if (Request.Query.albumId.HasValue)
             {
                 var albumId = (int)Request.Query.albumId;
-                return _audioTagService.GetRenamePreviews(artistId, albumId).Where(x => x.Changes.Any()).ToResource();
+                return _audioTagService.GetRetagPreviewsByAlbum(albumId).Where(x => x.Changes.Any()).ToResource();
+            }
+            else if (Request.Query.ArtistId.HasValue)
+            {
+                var artistId = (int)Request.Query.ArtistId;
+                return _audioTagService.GetRetagPreviewsByArtist(artistId).Where(x => x.Changes.Any()).ToResource();
+            }
+            else
+            {
+                throw new BadRequestException("One of artistId or albumId must be specified");
             }
 
-            return _audioTagService.GetRenamePreviews(artistId).ToResource();
         }
     }
 }

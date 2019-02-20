@@ -89,6 +89,9 @@ class OrganizePreviewModalContentConnector extends Component {
 OrganizePreviewModalContentConnector.propTypes = {
   artistId: PropTypes.number.isRequired,
   albumId: PropTypes.number,
+  renameTracks: PropTypes.bool.isRequired,
+  isPopulated: PropTypes.bool.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   fetchOrganizePreview: PropTypes.func.isRequired,
   fetchNamingSettings: PropTypes.func.isRequired,
   executeCommand: PropTypes.func.isRequired,

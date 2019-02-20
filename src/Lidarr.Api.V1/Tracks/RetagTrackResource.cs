@@ -25,7 +25,10 @@ namespace Lidarr.Api.V1.Tracks
     {
         public static RetagTrackResource ToResource(this NzbDrone.Core.MediaFiles.RetagTrackFilePreview model)
         {
-            if (model == null) return null;
+            if (model == null)
+            {
+                return null;
+            }
 
             return new RetagTrackResource
             {

@@ -108,7 +108,6 @@ namespace NzbDrone.Core.Test.MusicTests
         {
             var release = Builder<AlbumRelease>.CreateNew().Build();
             var release2 = Builder<AlbumRelease>.CreateNew().Build();
-            // var release2 = release.JsonClone();
 
             ReferenceEquals(release, release2).Should().BeFalse();
             release.Equals(release2).Should().BeTrue();
