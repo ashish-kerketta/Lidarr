@@ -34,8 +34,6 @@ namespace NzbDrone.Core.Configuration
         string ExtraFileExtensions { get; set; }
         RescanAfterRefreshType RescanAfterRefresh { get; set; }
         AllowFingerprinting AllowFingerprinting { get; set; }
-        WriteAudioTagsType WriteAudioTags { get; set; }
-        bool ScrubAudioTags { get; set; }
 
         //Permissions (Media Management)
         bool SetPermissionsLinux { get; set; }
@@ -65,9 +63,10 @@ namespace NzbDrone.Core.Configuration
 
         string PlexClientIdentifier { get; }
 
-        //MetadataSource
+        //Metadata
         string MetadataSource { get; set; }
-
+        WriteAudioTagsType WriteAudioTags { get; set; }
+        bool ScrubAudioTags { get; set; }
 
         //Forms Auth
         string RijndaelPassphrase { get; }

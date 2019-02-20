@@ -14,8 +14,6 @@ namespace Lidarr.Api.V1.Config
         public FileDateType FileDate { get; set; }
         public RescanAfterRefreshType RescanAfterRefresh { get; set; }
         public AllowFingerprinting AllowFingerprinting { get; set; }
-        public WriteAudioTagsType WriteAudioTags { get; set; }
-        public bool ScrubAudioTags { get; set; }
 
         public bool SetPermissionsLinux { get; set; }
         public string FileChmod { get; set; }
@@ -43,8 +41,6 @@ namespace Lidarr.Api.V1.Config
                 FileDate = model.FileDate,
                 RescanAfterRefresh = model.RescanAfterRefresh,
                 AllowFingerprinting = model.AllowFingerprinting,
-                WriteAudioTags = model.WriteAudioTags,
-                ScrubAudioTags = model.ScrubAudioTags,
 
                 SetPermissionsLinux = model.SetPermissionsLinux,
                 FileChmod = model.FileChmod,

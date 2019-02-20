@@ -223,20 +223,6 @@ namespace NzbDrone.Core.Configuration
             set { SetValue("AllowFingerprinting", value); }
         }
 
-        public WriteAudioTagsType WriteAudioTags
-        {
-            get { return GetValueEnum("WriteAudioTags", WriteAudioTagsType.No); }
-
-            set { SetValue("WriteAudioTags", value); }
-        }
-
-        public bool ScrubAudioTags
-        {
-            get { return GetValueBoolean("ScrubAudioTags", false); }
-
-            set { SetValue("ScrubAudioTags", value); }
-        }
-
         public bool SetPermissionsLinux
         {
             get { return GetValueBoolean("SetPermissionsLinux", false); }
@@ -277,6 +263,20 @@ namespace NzbDrone.Core.Configuration
             get { return GetValue("MetadataSource", ""); }
 
             set { SetValue("MetadataSource", value); }
+        }
+
+        public WriteAudioTagsType WriteAudioTags
+        {
+            get { return GetValueEnum("WriteAudioTags", WriteAudioTagsType.No); }
+
+            set { SetValue("WriteAudioTags", value); }
+        }
+
+        public bool ScrubAudioTags
+        {
+            get { return GetValueBoolean("ScrubAudioTags", false); }
+
+            set { SetValue("ScrubAudioTags", value); }
         }
 
         public int FirstDayOfWeek

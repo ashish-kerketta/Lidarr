@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import createArtistSelector from 'Store/Selectors/createArtistSelector';
 import { fetchRetagPreview } from 'Store/Actions/retagPreviewActions';
-import { fetchMediaManagementSettings } from 'Store/Actions/settingsActions';
+import { fetchMetadataProvider } from 'Store/Actions/settingsActions';
 import { executeCommand } from 'Store/Actions/commandActions';
 import * as commandNames from 'Commands/commandNames';
 import RetagPreviewModalContent from './RetagPreviewModalContent';
@@ -12,14 +12,14 @@ import RetagPreviewModalContent from './RetagPreviewModalContent';
 function createMapStateToProps() {
   return createSelector(
     (state) => state.retagPreview,
-    (state) => state.settings.mediaManagement,
+    (state) => state.settings.metadataProvider,
     createArtistSelector(),
-    (retagPreview, mediaManagement, artist) => {
+    (retagPreview, metadataSettings, artist) => {
       const props = { ...retagPreview };
-      props.isFetching = retagPreview.isFetching || mediaManagement.isFetching;
-      props.isPopulated = retagPreview.isPopulated && mediaManagement.isPopulated;
-      props.error = retagPreview.error || mediaManagement.error;
-      const writeAudioTags = mediaManagement.item.writeAudioTags;
+      props.isFetching = retagPreview.isFetching || metadataSettings.isFetching;
+      props.isPopulated = retagPreview.isPopulated && metadataSettings.isPopulated;
+      props.error = retagPreview.error || metadataSettings.error;
+      const writeAudioTags = metadataSettings.item.writeAudioTags;
       props.retagTracks = writeAudioTags === 'allFiles' || writeAudioTags === 'sync';
       props.path = artist.path;
 
@@ -30,7 +30,7 @@ function createMapStateToProps() {
 
 const mapDispatchToProps = {
   fetchRetagPreview,
-  fetchMediaManagementSettings,
+  fetchMetadataProvider,
   executeCommand
 };
 
@@ -40,7 +40,7 @@ class RetagPreviewModalContentConnector extends Component {
   // Lifecycle
 
   componentDidMount() {
-    this.props.fetchMediaManagementSettings();
+    this.props.fetchMetadataProvider();
   }
 
   componentDidUpdate(prevProps) {
@@ -93,7 +93,7 @@ RetagPreviewModalContentConnector.propTypes = {
   isPopulated: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,
   fetchRetagPreview: PropTypes.func.isRequired,
-  fetchMediaManagementSettings: PropTypes.func.isRequired,
+  fetchMetadataProvider: PropTypes.func.isRequired,
   executeCommand: PropTypes.func.isRequired,
   onModalClose: PropTypes.func.isRequired
 };
